@@ -1,0 +1,26 @@
+{
+  "name": "employee-payroll-system-by-bridegelab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nitin-yl/Employee-Payroll-System-By-BridegeLab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Nitin-yl/Employee-Payroll-System-By-BridegeLab/issues"
+  },
+  "homepage": "https://github.com/Nitin-yl/Employee-Payroll-System-By-BridegeLab#readme",
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^5.2.1"
+  }
+}
