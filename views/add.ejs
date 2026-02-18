@@ -1,17 +1,92 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Add Employee</title>
-    <link rel="stylesheet" href="/style.css" />
-  </head>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
 
-  <body>
-    <h1>Add Employee</h1>
-    <form method="POST" action="/add">
-      <input type="text" name="name" placeholder="Name" required />
-      <input type="text" name="department" placeholder="Department" required />
-      <input type="number" name="salary" placeholder="Basic Salary" required />
-      <button type="submit">Add</button>
+<div class="form-container">
+
+    <h2>Employee Payroll Form</h2>
+
+    <form action="/add" method="POST">
+
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Enter employee name" required>
+
+        <label>Profile Image</label>
+        <div class="avatars">
+            <span class="avatar blue"></span>
+            <span class="avatar green"></span>
+            <span class="avatar red"></span>
+            <span class="avatar yellow"></span>
+            <span class="avatar purple"></span>
+        </div>
+
+        <label>Gender</label>
+        <div class="radio-group">
+            <label><input type="radio" name="gender" value="Male"> Male</label>
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+        </div>
+
+        <label>Department</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="department" value="HR"> HR</label>
+            <label><input type="checkbox" name="department" value="Sales"> Sales</label>
+            <label><input type="checkbox" name="department" value="Finance"> Finance</label>
+            <label><input type="checkbox" name="department" value="Engineer"> Engineer</label>
+            <label><input type="checkbox" name="department" value="Others"> Others</label>
+        </div>
+
+        <label>Salary</label>
+        <input type="number" name="salary" placeholder="Enter salary amount" required>
+
+        <label>Start Date</label>
+        <div class="date-group">
+            <select name="day">
+                <option>Day</option>
+                <% for(let i=1;i<=31;i++){ %>
+                    <option><%= i %></option>
+                <% } %>
+            </select>
+
+            <select name="month">
+                <option>Month</option>
+                <option>Jan</option>
+                <option>Feb</option>
+                <option>Mar</option>
+                <option>Apr</option>
+                <option>May</option>
+                <option>Jun</option>
+                <option>Jul</option>
+                <option>Aug</option>
+                <option>Sep</option>
+                <option>Oct</option>
+                <option>Nov</option>
+                <option>Dec</option>
+            </select>
+
+            <select name="year">
+                <option>Year</option>
+                <% for(let y=2010;y<=2026;y++){ %>
+                    <option><%= y %></option>
+                <% } %>
+            </select>
+        </div>
+
+        <label>Notes</label>
+        <textarea name="notes" placeholder="Add notes here"></textarea>
+
+        <div class="form-buttons">
+            <a href="/" class="btn-grey">Cancel</a>
+            <button type="submit" class="btn-green">Submit</button>
+            <button type="reset" class="btn-grey">Reset</button>
+        </div>
+
     </form>
-  </body>
+
+</div>
+
+</body>
 </html>

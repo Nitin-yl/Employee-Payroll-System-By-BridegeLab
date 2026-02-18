@@ -1,49 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Employee Dashboard</title>
+    <title>Employee Payroll</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-<h1>Employee Payroll Dashboard</h1>
+<div class="topbar">
+    EMPLOYEE PAYROLL
+</div>
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Department</th>
-        <th>Date of Joining</th>
-        <th>Basic Salary</th>
-        <th>Tax</th>
-        <th>Net Salary</th>
-        <th>Action</th>
-    </tr>
+<div class="main">
 
-    <% employees.forEach(emp => { 
-        const tax = emp.salary * 0.12;
-        const net = emp.salary - tax;
+    <div class="header">
+        <h2>Employee Details</h2>
+
+        <div class="header-actions">
+            <form method="GET" action="/">
+                <div class="search-box">
+                    <i class="fa fa-search"></i>
+                    <input type="text" name="search" placeholder="Search..." value="<%= search %>">
+                </div>
+            </form>
+
+            <a href="/add" class="btn-green">
+                <i class="fa fa-plus"></i> Add User
+            </a>
+        </div>
+    </div>
+
+    <%
+        let totalSalary = 0
+        let totalTax = 0
+        let totalNet = 0
+        let avg = 0
+
+        employees.forEach(e => {
+            totalSalary += e.salary
+            totalTax += e.salary * 0.12
+            totalNet += e.salary - (e.salary * 0.12)
+        })
+
+        if (employees.length > 0) avg = totalSalary / employees.length
     %>
 
-    <tr>
-        <td><%=emp.name %></td>
-        <td><%=emp.Gender %></td>
-        <td><%=emp.position %></td>
-        <td><%=emp.DateOfJoining %></td>
-        <td><%=emp.salary %></td>
-        <td><%=tax.toFixed(2) %></td>
-        <td>₹<%=net.toFixed(2) %></td>
-        <td>
-            <a href="add.ejs">Edit</a>
-            <a href="edit.ejs">Delete</a>
+    <div class="stats">
+        <div class="stat"><span>Total Employees</span><h3><%= employees.length %></h3></div>
+        <div class="stat"><span>Total Basic Salary</span><h3>₹<%= totalSalary.toFixed(2) %></h3></div>
+        <div class="stat"><span>Total Tax (12%)</span><h3>₹<%= totalTax.toFixed(2) %></h3></div>
+        <div class="stat"><span>Total Net Salary</span><h3>₹<%= totalNet.toFixed(2) %></h3></div>
+        <div class="stat"><span>Average Salary</span><h3>₹<%= avg.toFixed(2) %></h3></div>
+    </div>
 
-        </td>
+    <div class="table-box">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Salary</th>
+                <th>Tax</th>
+                <th>Net</th>
+                <th>Actions</th>
+            </tr>
 
-    </tr>
+            <% employees.forEach(emp => { %>
+            <tr>
+                <td><%= emp.name %></td>
+                <td><%= emp.department %></td>
+                <td>₹<%= emp.salary %></td>
+                <td>₹<%= (emp.salary * 0.12).toFixed(2) %></td>
+                <td>₹<%= (emp.salary - emp.salary * 0.12).toFixed(2) %></td>
+                <td class="actions">
+                    <a href="/edit/<%= emp.id %>" class="icon-btn edit">
+                        <i class="fa fa-pen"></i>
+                    </a>
+                    <a href="/delete/<%= emp.id %>" class="icon-btn delete">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            <% }) %>
+        </table>
+    </div>
 
-    <% }) %>
-
-</table>
+</div>
 
 </body>
 </html>
